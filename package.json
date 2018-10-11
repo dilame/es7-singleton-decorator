@@ -1,9 +1,24 @@
 {
   "name": "singleton-decorator",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "An ES7 decorator for making classes act as singletons",
   "main": "singleton-decorator.js",
   "dependencies": {
     "reflect": "latest"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dilame/es7-singleton-decorator"
+  },
+  "author": "Dilame Bowzee",
+  "keywords": [
+    "es6",
+    "es7",
+    "es2015",
+    "es2016",
+    "babel",
+    "decorators",
+    "decorator",
+    "singleton"
+  ]
 }
