@@ -11,7 +11,7 @@ const getInstance = (target, args = []) => {
   }
   else {
     // create a new instance
-    let obj = Reflect.construct(target, args)
+    let obj = new target(...args)
     target[INSTANCE] = obj
     return obj
   }
@@ -56,4 +56,5 @@ const singleton = (target_or_style) => {
   return decorateImplicit(target_or_style)
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default singleton
