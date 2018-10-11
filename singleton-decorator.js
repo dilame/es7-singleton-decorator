@@ -1,4 +1,4 @@
-const INSTANCE = Symbol('singleton-decorator:instance')
+const INSTANCE = Symbol("singleton-decorator:instance");
 
 /**
  * Returns an instance of the targets
@@ -7,13 +7,22 @@ const getInstance = (target, args = []) => {
 
   // see if we already have an instance
   if (target[INSTANCE] instanceof target) {
-    return target[INSTANCE]
+    return target[INSTANCE];
   }
   else {
     // create a new instance
-    let obj = new target(...args)
-    target[INSTANCE] = obj
-    return obj
+    let obj = new target(...args);
+    target[INSTANCE] = obj;
+    return obj;
+  }
+};
+
+/**
+ * Decorates the target with the implicit singleton behavior.
+ */
+function decorateImplicit (target) {
+  return function SingletonImplicitInstance (...args) {
+    getInstance(target, args);
   }
 }
 
@@ -23,38 +32,31 @@ const getInstance = (target, args = []) => {
 const decorateExplicit = (target) => {
 
   // define the getInstance() method on the target
-  Object.defineProperty(target, 'getInstance', {
-    value: (...args) => getInstance(target, args)
-  })
+  Object.defineProperty(target, "getInstance", {
+    value: decorateImplicit(target)
+  });
 
-  return target
-}
-
-/**
- * Decorates the target with the implicit singleton behavior.
- */
-const decorateImplicit = (target) => {
-  return (...args) => getInstance(target, args)
-}
+  return target;
+};
 
 /**
  * The singleton decorator
  */
 const singleton = (target_or_style) => {
   if (!(target_or_style instanceof Function)) {
-    if (target_or_style === 'explicit') {
-      return decorateExplicit
+    if (target_or_style === "explicit") {
+      return decorateExplicit;
     }
-    else if (target_or_style === 'implicit') {
-      return decorateImplicit
+    else if (target_or_style === "implicit") {
+      return decorateImplicit;
     }
     else {
-      throw new Error(`Unknown singleton style '${target_or_style}'. Please omit or specifiy either 'explicit' or 'implicit'.`)
+      throw new Error(`Unknown singleton style '${target_or_style}'. Please omit or specifiy either 'explicit' or 'implicit'.`);
     }
   }
 
-  return decorateImplicit(target_or_style)
-}
+  return decorateImplicit(target_or_style);
+};
 
 // noinspection JSUnusedGlobalSymbols
-export default singleton
+export default singleton;
