@@ -1,6 +1,6 @@
 {
   "name": "singleton-decorator",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "An ES7 decorator for making classes act as singletons",
   "main": "singleton-decorator.js",
   "dependencies": {},
