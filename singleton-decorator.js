@@ -1,5 +1,3 @@
-import Reflect from 'reflect'
-
 const INSTANCE = Symbol('singleton-decorator:instance')
 
 /**
